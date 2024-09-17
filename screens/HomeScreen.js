@@ -1,12 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { SafeAreaView, Text, StyleSheet, View, Image } from 'react-native'; 
+import React, { useState } from 'react';
+import { SafeAreaView, Text, StyleSheet, View, Image, ScrollView } from 'react-native'; 
 import menuIcon from '../assets/icons/menu.png'
 import searchIcon from '../assets/icons/search.png'
 import { themeStyles } from '../theme';
+import TrendingMovies from '../components/trendingMovies';
 
 
 export default function HomeScreen() {
+    const [trending, setTrending] = useState(['samo', 'samur', 'malak']);
+
     return (
         <View style={styles.container}>
             {/* Search bar and logo */}
@@ -20,6 +23,14 @@ export default function HomeScreen() {
                     <Image source={searchIcon} style={styles.icon} />
                 </View>
             </SafeAreaView>
+
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{paddingBottom: 10}}
+            >
+                {/* Trending movies carousel */}
+                <TrendingMovies data={trending} />
+            </ScrollView>
         </View>
     );
 }
@@ -48,6 +59,6 @@ const styles = StyleSheet.create({
     movie: {
         color: '#fff',
         fontWeight: 'bold',
-        fontSize: 25,
+        fontSize: 30,
     },
 });
